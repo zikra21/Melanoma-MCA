@@ -1,0 +1,580 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif" color="BLUE">Predict Melanoma</title>
+
+    
+
+    <link rel="shortcut icon" href='{% static  "Prediction/assets/images/LOGO3.jpeg" %}'>
+    <link rel="stylesheet" href='{% static  "Prediction/assets/css/bootstrap.min.css" %}'>
+    <link rel="stylesheet" href='{% static  "Prediction/assets/css/fontawsom-all.min.css" %}'>
+    <link rel="stylesheet" href='{% static  "Prediction/assets/plugins/slider/css/owl.carousel.min.css" %}'>
+    <link rel="stylesheet" href='{% static  "Prediction/assets/plugins/slider/css/owl.theme.default.css" %}'>
+    <link rel="stylesheet" type="text/css" href='{% static  "Prediction/assets/css/style.css" %}'/>
+<style>
+    .logo img {
+        height: 4px; /* Set height of the logo image */
+        /* Add more styles as needed */
+    }
+    </style>
+
+
+</head>
+
+    <body>
+        <script src = "{% static 'Prediction/assets/js/chat.js' %}" type="text/javascript"></script>
+
+    <!-- ################# Header Starts Here#######################--->
+    <header>
+       
+        <div id="nav-head" class="header-nav" style="background-color: white;">
+            <div class="container">
+                <div class="row">
+                    
+                   
+                    <div class="col-lg-12">
+                        
+                    <div id="menu" class="d-md-block nav-item">
+                        <ul>
+                            
+                            <!-- <img style="height: 100px;" class="logo" src='{% static  "Prediction/assets/images/LOGO3.jpeg" %}' alt="Logo">
+                             -->
+                             
+                            
+                            <li><a style="color:#4f6dcd"  href="{% url 'home' %}">HOME</a></li>
+                            <li><a style="color:#4f6dcd" href="#contact">CONTACT US</a></li>
+                            <li><a style="color:#4f6dcd" href="#mela">ABOUT MELANOMA</a></li>
+                            <li><a style="color:#4f6dcd" href="{% url 'createProfile' %}">PROFILE</a></li>
+                
+                        </ul>
+                    </div>
+                    <div class="col-sm-2 d-none d-lg-block appoint float-right">
+                        {% if user.is_authenticated %} 
+                            <a style="color:white" href="{% url 'logout' %}"><button class="btn btn-info" style="background-color:#4f6dcd">Logout</button></a>
+                        {% else %}
+                            <a style="color:white" href="{% url 'login' %}"><button class="btn btn-info" style="background-color:#4f6dcd">Login</button></a>
+                            <a style="color:white" href="{% url 'signup' %}"><button class="btn btn-info" style="background-color:#4f6dcd" >Signup</button></a>
+                        {% endif %}
+                    </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- ################# Homepage img Starts Here#######################--->
+    <style>
+        .body {margin:0; padding:0;
+                font-size:20px;}
+        .banner{position:relative; width:100%; margin:0 auto;}
+        
+        .banner img{width:100%;height: 93.5%;}
+        
+         
+        .heading{color: white; position:absolute ; top:50%; width:100%; text-align: center; font-size: 6rem; text-shadow: 5px 5px 10px white;}
+
+        .aspect-ratio-wrapper {
+    position: relative;
+    width: 100%; /* Adjust as needed */
+    padding-top: 56.25%; /* Aspect ratio: 16:9 (9 / 16 * 100) */
+    /* For other aspect ratios:
+       - 4:3: padding-top: 75%; (3 / 4 * 100)
+       - 1:1 (square): padding-top: 100%; */
+}
+
+.aspect-ratio-wrapper img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the entire space */
+}
+
+        /* Full screen height and center content vertically */
+        .custom-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 5vh;
+            margin: 0;
+            background-color: #f5f1f1; /* Set a background color for demonstration */
+        }
+
+        /* Container for the logout button */
+        .button-container {
+            border-radius: 100px; 
+            position: absolute;
+            top: 70%;
+            right: 400px; /* Adjust this value to position the button from the right edge */
+            transform: translateY(-50%);
+        }
+
+        /* Styling the logout button */
+        .logout-button {
+            background-color: rgb(245, 241, 241); /* Light gray background color */
+            color: rgb(59, 31, 216); /* Dark blue text color */
+            border: none;
+            border-radius: 150px; /* Rounded corners */
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        /* Hover effect for the button */
+        .logout-button:hover {
+            background-color: #e0e0e0; /* Lighter gray background on hover */
+        }
+
+        .highlighted-text {
+            position: fixed;
+            top: 50%; /* Adjust as needed */
+            right: 20px; /* Adjust distance from right edge */
+            transform: translateY(-50%);
+            /* background-color: yellow; Highlight color */
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Optional: Add a shadow effect */
+            color: #c0c0c0; /* Light grey color for steel */
+            text-shadow: 1px 1px 3px #888; /* Soft shadow effect */
+            
+            border-radius: 5px;
+        }
+        /* Style for the highlighted text content */
+        .highlighted-text p {
+            margin: 0; /* Remove default margin */
+            /* font-weight: bold; Example: Make the text bold */
+            color: white; /* Example: Change text color */
+            font-size: 70px; /* Adjust font size (e.g., 18 pixels) */
+            font-family: 'Arial', sans-serif;
+        }
+
+
+
+    </style>
+    <!-- <div class="container">
+        <div class="row">
+            <div class="banner">
+                
+                <img class="d-block  w-200"   src='{% static  "Prediction/assets/images/slider/homepageimg2.jpg" %}'  alt="img">
+                <h1 class="heading">PREDICT MELANOMA</h1>
+
+            </div>
+
+            </div>
+        </div>
+    </div> --> 
+
+
+    
+    
+    
+     <!-- ################# Slider Starts Here#######################--->
+    
+            <div class="slider-detail">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <!-- <li data-target="#carouselExampleIndicators" data-slide-to="2"></li> -->
+            </ol>
+            
+            
+            <div class="carousel-inner">
+                
+                <div class="carousel-item active">
+                    <div class="banner">
+                 <img class="d-block w-100" src='{% static  "Prediction/assets/images/bgg2.jpg" %}' alt="First slide" style="height: 835px;">
+
+
+                 <!-- <h1 class="heading">PREDICT MELANOMA</h1> -->
+
+                 <div class="highlighted-text">
+                    <p>PREDICT MELANOMA</p>
+                </div>
+            
+                 <div class="button-container custom-container">
+                    <a href="{% url 'prediction' %}" style="text-decoration: none;">
+                        <button class="logout-button">PREDICT Here ></button>
+                    </a>
+                </div>
+            
+
+                 </div>
+                    
+                </div>
+                
+                   <div class="carousel-item ">
+                    <div class="banner">
+                        <img class="d-block w-100" src='{% static  "Prediction/assets/images/slider/homepageimg3.jpg" %}' alt="Second slide" style="height: 835px;">
+                        <h1 class="heading">PREDICT MELANOMA</h1>
+                        </div>
+                     
+                </div>
+                
+                <!-- <div class="carousel-item ">
+                    <div class="banner">
+                        <img class="d-block w-100" src='{% static  "Prediction/assets/images/slider/homepageimg.png" %}' alt="Third slide">
+                        <h1 class="heading">PREDICT MELANOMA</h1>
+                        </div>
+
+                </div>
+                 -->
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+    </div>
+    </div>
+    
+    <!-- ################# Key Features Starts Here#######################--->
+
+    <section class="key-features"> 
+            <div class="row no-margin">
+                <div class="col-lg-4 kvxol col-md-6">
+                    <div class="single-key ky-1">
+                       <div class="icon">
+                            <i class="fas fa-robot"></i>
+                       </div>
+                       <div class="detail">
+                           <h5>Supervised Learning Model</h5>
+                             <p>The application is integrated with a machine learning model which is used in predicting the melanoma tumour size based on various attributes.</p>
+                       </div>
+                       
+                        
+                    </div>
+                </div>
+
+                <div class="col-lg-4 kvxol  col-md-6">
+                    <div class="single-key ky-2">
+                        <div class="icon">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <div class="detail">
+                            <h5>Healthily</h5>
+                            <p>An interactive chatbot which can answer queries of the user.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 kvxol col-md-6">
+                    <div class="single-key ky-1">
+                        <div class="icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="detail">
+                             <h5>Info About Melanoma</h5>
+                            <p>The 'About Melanoma' section contains information about stages, symptoms, causes, prevention, risk factors and treatment.</p>
+                        </div>
+                        
+                       
+                    </div>
+                </div>
+
+               
+
+     
+               
+            </div>
+    </section>
+    <!-- ################# With Medical Starts Here#######################--->
+
+    <section id="about" class="with-medical">
+        <div class="container">
+            <div class="row">
+               <div class="col-lg-6 col-md-12">
+                    <img src='{% static  "Prediction/assets/images/choosing2.jpg" %}' lt="">
+                </div>
+                <div class="col-lg-6 col-md-12 txtr">
+                    <h4>Why choose<br>
+                     <span>PREDICT MELANOMA</span>   
+                    </h4>
+                    <p>Today we have many Melanoma Tumour size prediction tools and they are really efficient and secure but there are very few of them that give option to the user(doctor) to create their profile and manage their patients record, and interact with the chatbot.
+                         This website is integrated with a machine learning model which can easily predict the size of Melanoma Tumour based on the entered attributes.  This Idea will bring great ease to the doctors by enabling the users to make predictions and store records of their patients on the same platform.</p>
+                
+                
+            </div>
+        </div>
+    </section>
+    
+    
+     <!-- ################# Clinic Number Starts Here#######################--->
+
+
+    <div id='mela' class="doctor-message">
+        <div class="inner-lay">
+            <div class="container">
+               <div class="row session-title">
+                   <h2>What is Melanoma ?</h2>
+                   <p>Melanoma, also known as malignant melanoma, is a type of skin cancer that affects the melanocytes in the epidermis. It develops when melanocytes start to grow out of control. Melanocytes are special skin pigment cells that give our skin colour, and which allow our skin to tan when exposed to ultraviolet light from the sun.
+                   Melanoma is one of the most dangerous type of skin cancers because it’s much more likely to spread to other parts of the body if not caught and treated early.</p>
+               </div>
+                <div class="row">
+                    <div class="col-sm-3 numb">
+                        <h3>20x</h3>
+                        <span>Melanoma is more than 20 times more common in whites than in African Americans. </span>
+                    </div>
+                    <div class="col-sm-3 numb">
+                        <h3>5 Year</h3>
+                        <span>The estimated 5-year survival rate for patients whose melanoma is detected early is about 98 percent in the U.S.</span>
+                    </div>
+                    <div class="col-sm-3 numb">
+                        <h3>86%</h3>
+                        <span>One UK study found that about 86 percent of melanomas can be attributed to exposure to ultraviolet (UV) radiation from the sun.</span>
+                    </div>
+                    <div class="col-sm-3 numb">
+                        <h3>57,043+</h3>
+                        <span>In 2020, an estimated 57,043 people worldwide died from melanoma.</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    
+    <div id="services" class="services container-fluid">
+       <div class="container">
+           <div class="row">
+                <div class="col-md-4 no-padding col-sm-6">
+                    <div class="single-key b-b b-r">
+                        <i class="fas fa-hospital-alt"></i>
+                        <h5>Stages</h5>
+                        <p>There are five melanoma stages: 0 through IV. Some stages have subgroups; letters A through D are used to show those subgroups. The higher the number and letter, the more extensive the disease and (generally) the worse prognosis.                                                                      </p>
+                    </div>
+                </div>
+
+                <div class="col-md-4 no-padding col-sm-6">
+                    <div class="single-key b-b b-r">
+                        <i class="fas fa-user-md"></i>
+                        <h5>Symptoms</h5>
+                        <p>The first sign of a melanoma is often a new mole or a change in the appearance of an existing mole.
+
+                            Normal moles are generally round or oval, with a smooth edge, and usually no bigger than 6mm in diameter.
+                            
+                            But size is not a sure sign of melanoma. A healthy mole can be larger than 6mm in diameter, and a cancerous mole can be smaller than this.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4 no-padding col-sm-6">
+                    <div class="single-key b-b">
+                        <i class="fas fa-briefcase-medical"></i>
+                        <h5>Cause</h5>
+                        <p>For example, ultraviolet (UV) rays are clearly a major cause of melanoma. UV rays can damage the DNA in skin cells. Sometimes this damage affects certain genes that control how the cells grow and divide. If these genes no longer work properly, the affected cells may become cancer cells.s</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4 no-padding col-sm-6">
+                    <div class="single-key b-r">
+                        <i class="fas fa-capsules"></i>
+                        <h5>Prevention</h5>
+                        <li>
+                            <ul>Limit your exposure to ultraviolet (UV) rays.</ul>
+                            <ul>Avoid using tanning beds and sunlamps.</ul>
+                            <ul>Watch for abnormal moles.</ul>
+                            <ul>Avoid weakening your immune system (when possible).</ul>
+                            <ul>Make sunscreen a daily habit.</ul>
+                            <ul>Protect your body with sun-protective clothing, hat, and sunglasses.</ul>
+                        </li>
+                    </div>
+                </div>
+
+                <div class="col-md-4 no-padding col-sm-6">
+                    <div class="single-key b-r">
+                        <i class="fas fa-prescription-bottle-alt"></i>
+                        <h5>Risk Factors</h5>
+                        <li>
+                            <ul>Exposure to ultraviolet (UV) rays is a major risk factor for most melanomas.</ul>
+                            <ul>Lots of irregular or large moles has an increased risk for melanoma.</ul>
+                            <ul>The risk of melanoma is much higher for whites than for African Americans.</ul>
+                            <ul>Your risk of melanoma is higher if one or more of your first-degree relatives (parents, brothers, sisters, or children) has had melanoma.</ul>
+                            
+                        </li>
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-4 no-padding col-sm-6">
+                    <div class="single-key">
+                        <i class="far fa-thumbs-up"></i>
+                        <h5>Treatment</h5>
+                        <p>The type of treatment(s) your doctor recommends will depend on the stage and location of the melanoma. But other factors can be important as well, such as the risk of the cancer returning after treatment, if the cancer cells have certain gene changes, and your overall health.
+                            Early-stage melanomas can often be treated with surgery alone, but more advanced cancers often require other treatments. Sometimes more than one type of treatment is used. 
+                        </p>
+                    </div>
+                </div>
+            </div>
+       </div>
+    </div>
+    
+    
+    <!--  ************************* Gallery Starts Here ************************** -->
+    <!-- <div id="gallery" class="gallery">
+        <div class="container">
+           <div class="session-title row">
+                <h2>Our Gallery</h2>
+                <p>Not the answer you're looking for? Printing and typesetting inLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s Lorem</p>
+            </div>
+            <div class="row">
+
+
+                <div class="gallery-filter d-none d-sm-block">
+                    <button class="btn btn-default filter-button" data-filter="all">All</button>
+                    <button class="btn btn-default filter-button" data-filter="hdpe">Dental</button>
+                    <button class="btn btn-default filter-button" data-filter="sprinkle">Cardiology</button>
+                    <button class="btn btn-default filter-button" data-filter="spray"> Neurology</button>
+                    <button class="btn btn-default filter-button" data-filter="irrigation">Laboratry</button>
+                </div>
+                <br />
+
+
+
+                <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter hdpe">
+                    <img src='{% static  "Prediction/assets/images/gallery/gallery_01.jpg" %}' class="img-responsive">
+                </div>
+
+                <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter sprinkle">
+                    <img src='{% static  "Prediction/assets/images/gallery/gallery_02.jpg" %}' class="img-responsive">
+                </div>
+
+                <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter hdpe">
+                    <img src='{% static  "Prediction/assets/images/gallery/gallery_03.jpg" %}' class="img-responsive">
+                </div>
+
+                <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter irrigation">
+                    <img src='{% static  "Prediction/assets/images/gallery/gallery_04.jpg" %}' class="img-responsive">
+                </div>
+
+                <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter spray">
+                    <img src='{% static  "Prediction/assets/images/gallery/gallery_05.jpg" %}' class="img-responsive">
+                </div>
+
+
+
+                <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter spray">
+                    <img src='{% static  "Prediction/assets/images/gallery/gallery_06.jpg" %}' class="img-responsive">
+                </div>
+
+            </div>
+        </div>
+
+
+    </div> -->
+    <!-- ######## Gallery End ####### -->
+    
+        <!--  ************************* Contact Us Starts Here ************************** -->
+
+    <!-- <section id="contact" class="contact-us-single">
+        <div class="row no-margin">
+            <div class="col-sm-6 no-padding">
+                <iframe style="width:100%" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d249759.19784092825!2d79.10145254589841!3d12.009924873581818!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1448883859107" height="480" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </div>
+            <div class="col-sm-6 cop-ck">
+                <h2>Contact Form</h2>
+                <div class="row cf-ro">
+                    <div class="col-sm-3"><label>Enter Name :</label></div>
+                    <div class="col-sm-8"><input type="text" placeholder="Enter Name" name="name" class="form-control input-sm"></div>
+                </div>
+                <div class="row cf-ro">
+                    <div class="col-sm-3"><label>Email Address :</label></div>
+                    <div class="col-sm-8"><input type="text" name="name" placeholder="Enter Email Address" class="form-control input-sm"></div>
+                </div>
+                <div class="row cf-ro">
+                    <div class="col-sm-3"><label>Mobile Number:</label></div>
+                    <div class="col-sm-8"><input type="text" name="name" placeholder="Enter Mobile Number" class="form-control input-sm"></div>
+                </div>
+                <div class="row cf-ro">
+                    <div class="col-sm-3"><label>Enter Message:</label></div>
+                    <div class="col-sm-8">
+                        <textarea rows="5" placeholder="Enter Your Message" class="form-control input-sm"></textarea>
+                    </div>
+                </div>
+                <div class="row cf-ro">
+                    <div class="col-sm-3"><label></label></div>
+                    <div class="col-sm-8">
+                        <button class="btn btn-info btn-sm">Send Message</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+     -->
+    <!-- ################# Footer Starts Here#######################--->
+
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <!-- <div class="col-md-4 col-sm-12">
+                    <h2>About Us</h2>
+                    <p>
+                        Smart Eye is a leading provider of information technology, consulting, and business process services. Our dedicated employees offer strategic insights, technological expertise and industry experience.
+                    </p>
+                    <p>We focus on technologies that promise to reduce costs, streamline processes and speed time-to-market, Backed by our strong quality processes and rich experience managing global... </p>
+                </div>  -->
+                <!-- <div class="col-md-4 col-sm-12">
+                    <h2>Useful Links</h2>
+                    <ul class="list-unstyled link-list">
+                        <li><a ui-sref="about" href="#/about">About us</a><i class="fa fa-angle-right"></i></li>
+                        <li><a ui-sref="portfolio" href="#/portfolio">Portfolio</a><i class="fa fa-angle-right"></i></li>
+                        <li><a ui-sref="products" href="#/products">Latest jobs</a><i class="fa fa-angle-right"></i></li>
+                        <li><a ui-sref="gallery" href="#/gallery">Gallery</a><i class="fa fa-angle-right"></i></li>
+                        <li><a ui-sref="contact" href="#/contact">Contact us</a><i class="fa fa-angle-right"></i></li>
+                    </ul>
+                </div> -->
+                <div id='contact' class="col-md-4 col-sm-12 map-img">
+                    <h2>Contact Us</h2>
+                    <address class="md-margin-bottom-40">
+                        D/o Computer Science <br>
+                        Aligarh Muslim University (Aligarh District) <br>
+                        Uttar Pradesh, IND <br>
+                        Phone: +91 9159669599 <br>
+                        Email: <a href="zikralig21@gmail.com" class="">info@predoctmelanoma.in</a><br>
+                        
+                    </address>
+
+                </div>
+            </div>
+        </div>
+        
+
+    </footer>
+    <div class="copy">
+            <div class="container">
+                <a>2022 &copy; Zikra Waseem</a>
+                
+                <span>
+                <a href="https://github.com/zikra21"><i class="fab fa-github"></i></a>
+                <a href="https://twitter.com/ZikraWaseem"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.facebook.com/zikra.waseem.2101"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/_zikra21/?hl=en"><i class="fab fa-instagram"></i></a>
+        </span>
+            </div>
+
+        </div>
+    
+    </body>
+
+<script src='{% static  "Prediction/assets/js/jquery-3.2.1.min.js" %}' ></script>
+<script src='{% static  "Prediction/assets/js/popper.min.js" %}' ></script>
+<script src='{% static  "Prediction/assets/js/bootstrap.min.js" %}' ></script>
+<script src='{% static  "Prediction/assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js" %}' ></script>
+
+<script src='{% static  "Prediction/assets/js/script.js" %}'></script>
+
+
+</html>

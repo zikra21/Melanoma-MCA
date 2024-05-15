@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dermatologist Profile Registration</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="heading-section">Create Your Profile</h2>
+        <form method="POST" action="{% url 'createProfile' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="full_name">Full Name</label>
+                <input type="text" class="form-control" id="full_name" name="full_name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone_number">Phone Number</label>
+                <input type="text" class="form-control" id="phone_number" name="phone_number" required>
+            </div>
+            <div class="form-group">
+                <label for="medical_license">Medical License Number</label>
+                <input type="text" class="form-control" id="medical_license" name="medical_license" required>
+            </div>
+            <div class="form-group">
+                <label for="specialty">Medical Specialty</label>
+                <input type="text" class="form-control" id="specialty" name="specialty" required>
+            </div>
+            <div class="form-group">
+                <label for="years_experience">Years of Experience in Treating Melanoma</label>
+                <input type="number" class="form-control" id="years_experience" name="years_experience" required>
+            </div>
+            <div class="form-group">
+                <label for="clinic_affiliation">Current Clinic/Hospital Affiliation</label>
+                <input type="text" class="form-control" id="clinic_affiliation" name="clinic_affiliation" required>
+            </div>
+            <div class="form-group">
+                <label for="education">Education and Training</label>
+                <textarea class="form-control" id="education" name="education" rows="3" required></textarea>
+            </div>
+        
+            <div class="form-group">
+                <label for="profile_picture">Profile Picture</label>
+                <input type="file" class="form-control-file" id="profile_picture" name="profile_picture">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

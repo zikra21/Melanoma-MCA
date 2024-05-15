@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Login 10</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	{% load static %}
+
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	
+	
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+	<style>
+		/* Custom blue button */
+		.custom-blue-btn {
+		  color: #fff;
+		  background-color: #007bff;
+		  border-color: #007bff;
+		}
+		/* Hover and focus styles */
+		.custom-blue-btn:hover,
+		.custom-blue-btn:focus {
+		  background-color: #0056b3;
+		  border-color: #0056b3;
+		}
+
+		input[type="checkbox"] {
+  		display: none;
+		}
+
+/* Style the custom checkbox container */
+.checkbox-label {
+  position: relative;
+  cursor: pointer;
+  padding-left: 25px; /* space for the checkbox */
+}
+
+/* Style the checkmark */
+.checkmark1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #ccc; /* Default color */
+}
+
+/* Change color when the checkbox is checked */
+input[type="checkbox"]:checked + .checkbox-label .checkmark1 {
+  background-color: #007bff; /* New color when checked */
+}
+
+/* Optional: Style the checkmark appearance */
+.checkmark1:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+input[type="checkbox"]:checked + .checkbox-label .checkmark1:after {
+  display: block;
+}
+
+/* Custom checkmark design (optional) */
+.checkmark1:after {
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+</style>
+
+	</head>
+	
+	<!-- <body class="img js-fullheight" src={% static 'images/background.jpg' %}  style="background-image: url(static/images/bg1.webp);"> -->
+		<body class="img js-fullheight" style="background-image: url('{% static "images/bg1.webp" %}')">
+
+
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5">
+					<h2 class="heading-section">Predict Melanoma</h2>
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-md-6 col-lg-4">
+					<div class="login-wrap p-0">
+		      	<h3 class="mb-4 text-center">Have an account?</h3>
+		      	<form action="#" method="post" class="signin-form">
+					{% csrf_token %}
+		      		<div class="form-group">
+		      			<input type="text" name="username" class="form-control" placeholder="Username" required>
+		      		</div>
+	            <div class="form-group">
+	              <input id="password-field" type="password" name="Pass" class="form-control" placeholder="Password" required>
+	              <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+	            </div>
+	            <div class="form-group">
+	            	<button type="submit" class="form-control btn custom-blue-btn submit px-3">Sign In</button>
+	            </div>
+	            <div class="form-group d-md-flex">
+	            	<div class="w-50">
+						<!-- <input type="checkbox" id="myCheckbox">
+						<label for="myCheckbox" class="checkbox-label">
+  						<span class="checkmark"></span>Remember Me
+						</label> -->
+		            	
+
+									<label for="remember-me" class="checkbox-wrap checkbox-label" style="color: #007bff;">
+										<input type="checkbox" id="remember-me" checked>
+										<span class="checkmark"></span>
+										Remember Me
+									</label>
+									
+
+								</div>
+								<div class="w-50 text-md-right">
+									<a href="#" style="color: #007bff">Forgot Password</a>
+								</div>
+	            </div>
+	          </form>
+	          <!-- <p class="w-100 text-center"><a style="color: #007bff;" href="{% url 'signup' %}">Create an account</a></p> -->
+			  <p class="w-100 text-center"> <!-- Set text alignment to right -->
+				<a style="color: black; text-decoration: underline;" href="{% url 'signup' %}">Create an account</a>
+			  </p>
+			  
+
+		      </div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+	<script src="{% static 'js/popper.js' %}"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'js/main.js' %}"></script>
+	
+
+	</body>
+</html>
+

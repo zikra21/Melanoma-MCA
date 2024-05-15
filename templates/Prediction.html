@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        .form-container {
+            width: 80%;
+            max-width: 800px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #007bff;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 12px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Enter Attributes for Prediction</h2>
+    <form action="{% url 'result' %}">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <h2>Enter Attributes for Prediction</h2>
+            <label for="mass_npea">Attribute 1:</label>
+            <input type="text" id="mass_npea" name="mass_npea" required>
+        </div>
+        <div class="form-group">
+            <label for="size_npear">Attribute 2:</label>
+            <input type="text" id="size_npear" name="size_npear" required>
+        </div>
+        <div class="form-group">
+            <label for="malign_ratio">Attribute 3:</label>
+            <input type="text" id="malign_ratio" name="malign_ratio" required>
+        </div>
+        <div class="form-group">
+            <label for="damage_size">Attribute 4:</label>
+            <input type="text" id="damage_size" name="damage_size" required>
+        </div>
+        <div class="form-group">
+            <label for="exposed_area">Attribute 5:</label>
+            <input type="text" id="exposed_area" name="exposed_area" required>
+        </div>
+        <div class="form-group">
+            <label for="std_dev_malign">Attribute 6:</label>
+            <input type="text" id="std_dev_malign" name="std_dev_malign" required>
+        </div>
+        <div class="form-group">
+            <label for="err_malign">Attribute 7:</label>
+            <input type="text" id="err_malign" name="err_malign" required>
+        </div>
+        <div class="form-group">
+            <label for="malign_penalty">Attribute 8:</label>
+            <input type="text" id="malign_penalty" name="malign_penalty" required>
+        </div>
+        <div class="form-group">
+            <label for="damage_ratio">Attribute 9:</label>
+            <input type="text" id="damage_ratio" name="damage_ratio" required>
+        </div>
+        
+        <div class="form-group">
+            <button type="submit">Submit Prediction</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
